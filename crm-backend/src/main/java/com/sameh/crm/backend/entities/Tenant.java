@@ -36,7 +36,6 @@ public class Tenant {
     @Column(name="created_by", nullable = false)
     private String createBy;
 
-
     public Tenant() {
     }
 

@@ -36,7 +36,8 @@ public class Customer {
     @Column(name="created_at", nullable = false)
     private Instant createdAt;
 
-    @OneToMany(mappedBy = "customer_id", cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name="customer_id")
     private List<ContactPoint> contactPoints;
 
     public Customer() {
