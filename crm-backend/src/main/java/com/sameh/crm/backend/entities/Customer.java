@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 
 import java.time.Instant;
 import java.util.List;
+import java.util.UUID;
 
 @Entity
 @Table(name="CUSTOMER")
@@ -16,14 +17,14 @@ public class Customer {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name="id", nullable = false)
-    private String id;
+    private UUID id;
 
     @ManyToOne
     @JoinColumn(name="tenant_id", nullable = false)
     private Tenant tenant;
 
     @Enumerated(EnumType.STRING)
-    @Column(name="customer_type", nullable = false)
+    @Column(name="type", nullable = false)
     private CustomerType type;
 
     @Column(name="name", nullable = false)

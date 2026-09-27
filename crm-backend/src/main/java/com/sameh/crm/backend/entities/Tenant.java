@@ -8,7 +8,6 @@ import java.time.Instant;
 @Table(name="TENANT")
 public class Tenant {
 
-
     public enum TenantStatus{
         ACTIVE, INACTIVE
     }

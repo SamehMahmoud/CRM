@@ -10,9 +10,9 @@ import java.time.Instant;
 public class User {
 
 
-    public static enum UserStatus {
-        ACTIVE, SUSPENDED;
-    }
+//    public static enum UserStatus {
+//        ACTIVE, SUSPENDED;
+//    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
@@ -28,23 +28,22 @@ public class User {
     @Column(name ="email", nullable = false, unique = true)
     private String email;
 
-    @Column(name="status" , nullable = false)
-    @Enumerated(EnumType.STRING)
-    private UserStatus status;
+//    @Column(name="status" , nullable = false)
+//    @Enumerated(EnumType.STRING)
+//    private UserStatus status;
 
-    @Column(name="created_at" , nullable = false)
-    private Instant createdAt;
+//    @Column(name="created_at" , nullable = false)
+//    private Instant createdAt;
 
     public User() {
 
     }
 
-    public User(String name, String phone, String email, UserStatus status, Instant createdAt) {
+    public User(String name, String phone, String email) {
         this.name = name;
         this.phone = phone;
         this.email = email;
-        this.status = status;
-        this.createdAt = createdAt;
+//        this.createdAt = createdAt;
     }
 
     public String getId() {
@@ -79,21 +78,21 @@ public class User {
         this.email = email;
     }
 
-    public UserStatus getStatus() {
-        return status;
-    }
+//    public UserStatus getStatus() {
+//        return status;
+//    }
+//
+//    public void setStatus(UserStatus status) {
+//        this.status = status;
+//    }
 
-    public void setStatus(UserStatus status) {
-        this.status = status;
-    }
-
-    public Instant getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(Instant createdAt) {
-        this.createdAt = createdAt;
-    }
+//    public Instant getCreatedAt() {
+//        return createdAt;
+//    }
+//
+//    public void setCreatedAt(Instant createdAt) {
+//        this.createdAt = createdAt;
+//    }
 
     @Override
     public String toString() {
@@ -102,8 +101,6 @@ public class User {
                 ", name='" + name + '\'' +
                 ", phone='" + phone + '\'' +
                 ", email='" + email + '\'' +
-                ", status=" + status +
-                ", createdAt=" + createdAt +
                 '}';
     }
 
