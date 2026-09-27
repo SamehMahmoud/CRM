@@ -83,7 +83,7 @@ public class User {
         this.email = email;
     }
 
-    public void setFirstName(String firstName){this.firstName=firstName}
+    public void setFirstName(String firstName){this.firstName=firstName;}
 
     public String getFirstName(){
         return this.firstName;
