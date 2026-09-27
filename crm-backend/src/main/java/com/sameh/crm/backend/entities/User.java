@@ -18,8 +18,8 @@ public class User {
     @Column(name="id")
     private String id;
 
-    @Column(name ="name", nullable = false)
-    private String name;
+    @Column(name ="username", nullable = false)
+    private String username;
 
     @Column(name="first_name", nullable = true)
     private String firstName;
@@ -45,7 +45,7 @@ public class User {
     }
 
     public User(String name, String phone, String email) {
-        this.name = name;
+        this.username = name;
         this.phone = phone;
         this.email = email;
 //        this.createdAt = createdAt;
@@ -59,12 +59,12 @@ public class User {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getUsername() {
+        return username;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getPhone() {
@@ -117,11 +117,13 @@ public class User {
     public String toString() {
         return "User{" +
                 "id='" + id + '\'' +
-                ", name='" + name + '\'' +
+                ", name='" + username + '\'' +
                 ", phone='" + phone + '\'' +
                 ", email='" + email + '\'' +
                 ",firstName='" + firstName + '\''+
                 ",lastName='" + lastName + '\''+
+                ",status='" + status + '\''+
+                ",createdAt='" + createdAt + '\''+
                 '}';
     }
 
