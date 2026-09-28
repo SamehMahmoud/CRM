@@ -23,9 +23,10 @@ public class Tenant {
     @Column(name="email", nullable = false, unique = true)
     private String email;
 
-    @Column(name="phone", nullable = false, unique = true)
+    @Column(name="phone")
     private String phone;
 
+    @Enumerated(EnumType.STRING)
     @Column(name="status", nullable = false)
     private TenantStatus status;
 
@@ -33,7 +34,7 @@ public class Tenant {
     private Instant createdAt;
 
     @Column(name="created_by", nullable = false)
-    private String createBy;
+    private String createdBy;
 
     public Tenant() {
     }
@@ -90,12 +91,12 @@ public class Tenant {
         this.status = status;
     }
 
-    public String getCreateBy() {
-        return createBy;
+    public String getCreatedBy() {
+        return createdBy;
     }
 
-    public void setCreateBy(String createBy) {
-        this.createBy = createBy;
+    public void setCreatedBy(String createdBy) {
+        this.createdBy = createdBy;
     }
 
     public Instant getCreatedAt() {
@@ -115,7 +116,7 @@ public class Tenant {
                 ", phone='" + phone + '\'' +
                 ", status=" + status +
                 ", createdAt=" + createdAt +
-                ", createBy='" + createBy + '\'' +
+                ", createBy='" + createdBy + '\'' +
                 '}';
     }
 }

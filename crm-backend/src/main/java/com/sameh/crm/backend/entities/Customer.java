@@ -17,11 +17,14 @@ public class Customer {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name="id", nullable = false)
-    private UUID id;
+    private String id;
 
-    @ManyToOne
-    @JoinColumn(name="tenant_id", nullable = false)
-    private Tenant tenant;
+//    @ManyToOne
+//    @JoinColumn(name="tenant_id", nullable = false)
+//    private Tenant tenant;
+
+    @Column(name="tenant_id", nullable = false)
+    private String tenantId;
 
     @Enumerated(EnumType.STRING)
     @Column(name="type", nullable = false)
@@ -30,29 +33,32 @@ public class Customer {
     @Column(name="name", nullable = false)
     private String name;
 
-    @ManyToOne
-    @JoinColumn(name="created_by", nullable = false)
-    private User createdBy;
+//    @ManyToOne
+//    @JoinColumn(name="created_by", nullable = false)
+//    private User createdBy;
+
+    @Column(name="created_by", nullable = false)
+    private String createdBy;
 
     @Column(name="created_at", nullable = false)
     private Instant createdAt;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name="customer_id")
     private List<ContactPoint> contactPoints;
 
     public Customer() {
     }
 
-    public Customer(Tenant tenant, CustomerType type, String name, User createdBy) {
-        this(tenant, type, name, createdBy, Instant.now());
+    public Customer(String tenantId, CustomerType type, String name, String userId) {
+        this(tenantId, type, name, userId, Instant.now());
     }
 
-    public Customer(Tenant tenant, CustomerType type, String name, User createdBy, Instant createdAt) {
-        this.tenant = tenant;
+    public Customer(String tenantId, CustomerType type, String name, String userId, Instant createdAt) {
+        this.tenantId = tenantId;
         this.type = type;
         this.name = name;
-        this.createdBy = createdBy;
+        this.createdBy = userId;
         this.createdAt = createdAt;
     }
 
@@ -62,14 +68,6 @@ public class Customer {
 
     public void setId(String id) {
         this.id = id;
-    }
-
-    public Tenant getTenant() {
-        return tenant;
-    }
-
-    public void setTenant(Tenant tenant) {
-        this.tenant = tenant;
     }
 
     public CustomerType getType() {
@@ -88,14 +86,6 @@ public class Customer {
         this.name = name;
     }
 
-    public User getCreatedBy() {
-        return createdBy;
-    }
-
-    public void setCreatedBy(User createdBy) {
-        this.createdBy = createdBy;
-    }
-
     public Instant getCreatedAt() {
         return createdAt;
     }
@@ -112,11 +102,27 @@ public class Customer {
         this.contactPoints = contactPoints;
     }
 
+    public String getTenantId() {
+        return tenantId;
+    }
+
+    public void setTenantId(String tenantId) {
+        this.tenantId = tenantId;
+    }
+
+    public String getCreatedBy() {
+        return createdBy;
+    }
+
+    public void setCreatedBy(String createdBy) {
+        this.createdBy = createdBy;
+    }
+
     @Override
     public String toString() {
         return "Customer{" +
                 "id='" + id + '\'' +
-                ", tenant=" + tenant +
+                ", tenantId=" + tenantId +
                 ", type=" + type +
                 ", name='" + name + '\'' +
                 ", createdBy=" + createdBy +

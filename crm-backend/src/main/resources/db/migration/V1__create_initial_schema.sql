@@ -13,13 +13,12 @@ CREATE TABLE TENANT(
   id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
   name varchar(50) NOT NULL,
   phone varchar(50),
-  email varchar(50) NOT NULL,
+  email varchar(50) UNIQUE NOT NULL ,
   status varchar(20) NOT NULL,
   created_at timestamptz NOT NULL,
   created_by uuid NOT NULL
 );
 CREATE INDEX tenant_created_by_idx ON TENANT(created_by);
-CREATE INDEX tenant_email_idx ON TENANT(email);
 CREATE INDEX tenant_name_idx ON TENANT(name);
 
 
@@ -32,14 +31,11 @@ CREATE TABLE USER_TENANT(
 );
 CREATE INDEX user_tenant_idx ON USER_TENANT(tenant_id);
 
-
-CREATE TYPE customer_type AS ENUM('INDIVIDUAL', 'ORGANIZATION');
-
 CREATE TABLE CUSTOMER(
     id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
     name varchar(50) NOT NULL,
     tenant_id uuid NOT NULL references TENANT(id),
-    type customer_type NOT NULL,
+    type varchar(20) NOT NULL,
     created_at timestamptz NOT NULL,
     created_by uuid NOT NULL references APP_USER(id)
 );
@@ -58,6 +54,4 @@ CREATE TABLE CONTACT_POINT(
 );
 CREATE UNIQUE INDEX contact_point_email_unique_idx ON CONTACT_POINT(tenant_id, normalized_value) WHERE type = 'EMAIL';
 CREATE INDEX contact_point_customer_idx on CONTACT_POINT(customer_id);
-
-
 CREATE INDEX contact_point_nval_idx ON CONTACT_POINT(normalized_value);
