@@ -48,7 +48,8 @@ public class User {
         this.username = name;
         this.phone = phone;
         this.email = email;
-//        this.createdAt = createdAt;
+        this.status = UserStatus.ACTIVE;
+        this.createdAt = Instant.now();
     }
 
     public String getId() {
