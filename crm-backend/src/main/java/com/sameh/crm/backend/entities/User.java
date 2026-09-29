@@ -33,6 +33,9 @@ public class User {
     @Column(name ="email", nullable = false, unique = true)
     private String email;
 
+    @Column(name="password_hash", nullable = false)
+    private String passwordHash;
+
     @Column(name="status" , nullable = false)
     @Enumerated(EnumType.STRING)
     private UserStatus status;
@@ -112,6 +115,14 @@ public class User {
 
     public void setCreatedAt(Instant createdAt) {
         this.createdAt = createdAt;
+    }
+
+    public String getPasswordHash() {
+        return passwordHash;
+    }
+
+    public void setPasswordHash(String passwordHash) {
+        this.passwordHash = passwordHash;
     }
 
     @Override

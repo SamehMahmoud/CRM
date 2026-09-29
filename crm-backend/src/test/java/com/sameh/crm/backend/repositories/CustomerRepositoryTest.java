@@ -27,7 +27,10 @@ public class CustomerRepositoryTest {
     @Test
     void shouldSaveCustomer(){
 
-        User detachedUser = new User("AhmedKamal","002010369311004","test@gmail.com");
+        User detachedUser = new User("AhmedKamal02","002010369311004","testxx@gmail.com");
+        detachedUser.setFirstName("Ahmed");
+        detachedUser.setLastName("Ali");
+        detachedUser.setPasswordHash("dasdasldjalskdjlakshashahs");
         User presistedUser = this.userRepository.save(detachedUser);
 
         Tenant detachedTenant = new Tenant("test tenant", "tenantxx@gmail.com", "0114151521152");

@@ -1,6 +1,7 @@
 CREATE TABLE APP_USER(
   id varchar(36) PRIMARY KEY ,
   username varchar(50) UNIQUE NOT NULL,
+  password_hash varchar NOT NULL ,
   phone varchar(50),
   email varchar(50) UNIQUE NOT NULL,
   first_name varchar(50) NULL,
