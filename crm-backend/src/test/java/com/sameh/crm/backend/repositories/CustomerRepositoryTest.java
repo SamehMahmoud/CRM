@@ -52,6 +52,10 @@ public class CustomerRepositoryTest {
         assertEquals(presistedTenant.getId(), foundCustomer.getTenantId());
         assertEquals(presistedUser.getId(), foundCustomer.getCreatedBy());
 
+        this.customerRepository.delete(presistedCustomer);
+        this.tenantRepository.delete(presistedTenant);
+        this.userRepository.delete(presistedUser);
+
         out.println("CustomerRepository test done !");
     }
 

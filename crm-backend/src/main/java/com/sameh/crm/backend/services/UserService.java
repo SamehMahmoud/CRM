@@ -4,10 +4,10 @@ import com.sameh.crm.backend.entities.User;
 import com.sameh.crm.backend.models.RegistrationRequest;
 import com.sameh.crm.backend.models.RegistrationResponse;
 import com.sameh.crm.backend.repositories.UserRepository;
+import com.sameh.crm.backend.services.exceptions.FieldInUseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
 import java.time.Instant;
 
 @Service
@@ -28,7 +28,7 @@ public class UserService {
         String email = request.getEmail();
 
         if(this.userRepository.existsByUsernameOrEmail(username, email)){
-            throw new IllegalArgumentException("Username or email in use !");
+            throw new FieldInUseException("Username or email in use !");
         }
 
         String hashedPassword = this.passwordEncoder.encode(request.getPlainTextPassword());
