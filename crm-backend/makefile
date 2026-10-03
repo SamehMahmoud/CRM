@@ -5,4 +5,4 @@ run:
 	set -a && . ./.env && set +a && ./mvnw spring-boot:run
 
 test:
-	set -a && . ./.env && set +a && ./mvnw test
+	set -a && . ./.env && set +a && ./mvnw clean test

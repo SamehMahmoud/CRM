@@ -57,3 +57,20 @@ CREATE TABLE CONTACT_POINT(
 CREATE UNIQUE INDEX contact_point_email_unique_idx ON CONTACT_POINT(tenant_id, normalized_value) WHERE type = 'EMAIL';
 CREATE INDEX contact_point_customer_idx on CONTACT_POINT(customer_id);
 CREATE INDEX contact_point_nval_idx ON CONTACT_POINT(normalized_value);
+
+
+CREATE TABLE REFRESH_TOKEN(
+  id varchar(36) PRIMARY KEY ,
+  user_id varchar(36) NOT NULL references APP_USER(id),
+  token_hash varchar(255) NOT NULL UNIQUE,
+  expires_at timestamptz NOT NULL,
+  created_at timestamptz NOT NULL,
+  revoked_at timestamptz 
+);
+
+CREATE INDEX refresh_token_user_idx ON REFRESH_TOKEN(user_id);
+CREATE INDEX refresh_token_expiry_idx ON REFRESH_TOKEN(expires_at);
+
+CREATE EXTENSION IF NOT EXISTS pg_cron;
+
+SELECT cron.schedule('cleanup-expired-refresh-tokens', '*/15 * * * *', $$ DELETE FROM REFRESH_TOKEN WHERE expires_at <= now() $$);

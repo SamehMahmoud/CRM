@@ -2,6 +2,10 @@ spring:
   application:
     name: crm-backend
 
+server:
+  servlet:
+    context-path: /api/v1
+
 datasource:
    url: ${SPRING_DATASOURCE_URL}
    username: ${SPRING_DATASOURCE_USERNAME}
@@ -10,3 +14,11 @@ datasource:
 jpa:
   hibernate:
   ddl-auto: validate
+
+jwt:
+  access:
+    secret: ${JWT_ACCESS_SECRET}
+    expiration: ${JWT_ACCESS_EXPIRATION}
+  refresh:
+    secret: ${JWT_REFRESH_SECRET}
+    expiration: ${JWT_REFRESH_EXPIRATION}  

@@ -5,6 +5,7 @@ import jakarta.validation.constraints.*;
 
 public class RegistrationRequest {
 
+    @Pattern(regexp = "^[A-Za-z0-9_]+$", message = "Username can contain only letters, digits and underscore")
     @Size(max = 50, min=2)
     @NotBlank(message = "Username can't be blank")
     private String username;
